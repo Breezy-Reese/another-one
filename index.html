@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harmony Medical Centre</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #f8f9fa;
+      margin: 0;
+      display: flex;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      height: 100vh;
+      width: 220px;
+      background-color: #0077b6;
+      color: white;
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      padding-top: 20px;
+      transition: width 0.3s;
+    }
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1.2rem;
+    }
+    .sidebar a, .dropdown-btn {
+      padding: 15px 20px;
+      text-decoration: none;
+      color: white;
+      display: block;
+      transition: background 0.3s;
+      border: none;
+      background: none;
+      cursor: pointer;
+      text-align: left;
+      font-size: 1rem;
+      width: 100%;
+    }
+    .sidebar a:hover, .dropdown-btn:hover {
+      background: #023e8a;
+    }
+
+    /* Dropdown container */
+    .dropdown-container {
+      display: none;
+      background-color: #0096c7;
+    }
+    .dropdown-container a {
+      padding-left: 40px;
+      font-size: 0.95rem;
+    }
+
+    /* Content */
+    .content {
+      margin-left: 220px;
+      padding: 20px;
+      flex: 1;
+    }
+
+    /* Sections */
+    section {
+      display: none;
+      padding: 50px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+    section.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+    @keyframes fadeIn {
+      from {opacity:0; transform:translateY(15px);}
+      to {opacity:1; transform:translateY(0);}
+    }
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      color: #0077b6;
+      margin-bottom: 25px;
+    }
+
+    /* About Us */
+    .about-content { max-width: 800px; margin: auto; text-align: center; line-height: 1.8; }
+    .about-content h3 { color: #023e8a; margin-top: 20px; }
+    .about-values {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px; margin-top: 25px;
+    }
+    .about-card {
+      background: #fff; padding: 20px; border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+
+    /* Grid Cards */
+    .grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #fff; padding: 20px; border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      text-align: center; transition: transform 0.3s;
+    }
+    .card:hover { transform: translateY(-5px); }
+    .card img { width: 100%; max-height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
+    .card h3 { margin: 10px 0; color: #0077b6; }
+
+    /* Forms */
+    .form-container {
+      background: #fff; padding: 25px; border-radius: 10px; 
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      max-width: 420px; margin: 20px auto;
+    }
+    .form-container h3 { margin-bottom: 15px; color: #0077b6; text-align: center; }
+    .form-container input, .form-container select, .form-container button {
+      width: 100%; padding: 10px; margin: 8px 0;
+      border-radius: 5px; border: 1px solid #ccc;
+    }
+    .form-container button {
+      background: #0077b6; color: #fff; border: none; cursor: pointer;
+    }
+    .form-container button:hover { background: #023e8a; }
+    .form-footer { text-align: center; margin-top: 8px; font-size: 0.9em; }
+
+    /* Footer */
+    footer {
+      background: #0077b6; color: white; text-align: center;
+      padding: 15px; margin-top: 40px; border-radius: 8px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 60px;
+      }
+      .sidebar h2 { display: none; }
+      .sidebar a, .dropdown-btn { text-align: center; font-size: 14px; padding: 12px 0; }
+      .dropdown-container a { padding-left: 20px; }
+      .content { margin-left: 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Menu</h2>
+    <a href="#" onclick="showSection('Home')">🏠 Home</a>
+    <button class="dropdown-btn">☰ More</button>
+    <div class="dropdown-container">
+      <a href="#" onclick="showSection('services')">Services</a>
+      <a href="#" onclick="showSection('departments')">Departments</a>
+      <a href="#" onclick="showSection('portal')">Patient Portal</a>
+      <a href="#" onclick="showSection('contact')">Contact</a>
+      <a href="#" onclick="showSection('admin')">🔑 Admin Dashboard</a>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- Home -->
+    <section id="Home" class="active">
+      <h2 class="section-title">Welcome to Harmony Medical Centre</h2>
+      <div class="about-content">
+        <p>At <b>Harmony Medical Centre</b>, we believe healthcare is about compassion, trust, and excellence. 
+        We blend <b>modern medical technology</b> with a <b>patient-centered approach</b>, ensuring that every person 
+        receives world-class care and attention.</p>
+
+        <h3>🌍 Our Mission</h3>
+        <p>To deliver accessible, affordable, and holistic healthcare that improves lives and promotes wellness for all.</p>
+
+        <h3>✨ Our Vision</h3>
+        <p>To be the most trusted healthcare provider in the region, known for innovation, integrity, and patient satisfaction.</p>
+
+        <div class="about-values">
+          <div class="about-card"><i class="fa-solid fa-hand-holding-heart fa-2x" style="color:#0077b6;"></i><p><b>Compassion</b><br>We treat every patient with dignity, empathy, and respect.</p></div>
+          <div class="about-card"><i class="fa-solid fa-user-md fa-2x" style="color:#0077b6;"></i><p><b>Excellence</b><br>Highly trained staff delivering safe and effective care.</p></div>
+          <div class="about-card"><i class="fa-solid fa-microscope fa-2x" style="color:#0077b6;"></i><p><b>Innovation</b><br>Advanced technology ensures accurate diagnosis and treatment.</p></div>
+          <div class="about-card"><i class="fa-solid fa-people-group fa-2x" style="color:#0077b6;"></i><p><b>Community</b><br>Promoting wellness through outreach and awareness programs.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services">
+      <h2 class="section-title">Our Services</h2>
+      <div class="grid">
+        <div class="card"><img src="images/Outpatient Care.jpg" alt="Outpatient Care"><h3><i class="fa-solid fa-user-doctor"></i> Outpatient Care</h3><p>Comprehensive outpatient services with professional staff ensuring timely care.</p></div>
+        <div class="card"><img src="images/emergency.jpg" alt="Emergency"><h3><i class="fa-solid fa-truck-medical"></i> Emergency</h3><p>24/7 emergency response with trained experts ready to save lives.</p></div>
+        <div class="card"><img src="images/Specialist Clinics.jpg" alt="Clinics"><h3><i class="fa-solid fa-stethoscope"></i> Specialist Clinics</h3><p>Dedicated clinics in cardiology, pediatrics, nephrology, and more.</p></div>
+        <div class="card"><img src="images/pharmacy.jpg" alt="Pharmacy"><h3><i class="fa-solid fa-prescription-bottle-medical"></i> Pharmacy</h3><p>Fully stocked pharmacy with prescriptions and consultations.</p></div>
+        <div class="card"><img src="images/laboratory.jpg" alt="Laboratory"><h3><i class="fa-solid fa-vials"></i> Laboratory</h3><p>Modern lab delivering accurate, fast, and reliable test results.</p></div>
+      </div>
+    </section>
+
+    <!-- Departments -->
+    <section id="departments">
+      <h2 class="section-title">Our Departments</h2>
+      <div class="grid">
+        <div class="card"><img src="images/renal.jpg" alt="Renal Unit"><h3><i class="fa-solid fa-droplet"></i> Renal Unit</h3><p>Comprehensive kidney care including dialysis and transplant support.</p></div>
+        <div class="card"><img src="images/cardiology.jpg" alt="Cardiology"><h3><i class="fa-solid fa-heart-pulse"></i> Cardiology</h3><p>Advanced cardiac diagnostics, treatments, and preventive care.</p></div>
+        <div class="card"><img src="images/peditiratics.jpg" alt="Pediatrics"><h3><i class="fa-solid fa-baby"></i> Pediatrics</h3><p>Specialized care for infants, children, and adolescents.</p></div>
+        <div class="card"><img src="images/radiology.jpg" alt="Radiology"><h3><i class="fa-solid fa-x-ray"></i> Radiology</h3><p>High-quality imaging services including X-ray, CT, and MRI.</p></div>
+        <div class="card"><img src="images/orthopedics.jpg" alt="Orthopedics"><h3><i class="fa-solid fa-bone"></i> Orthopedics</h3><p>Expert treatment for bones, joints, and musculoskeletal issues.</p></div>
+        <div class="card"><img src="images/maternity.jpg" alt="Maternity"><h3><i class="fa-solid fa-person-pregnant"></i> Maternity</h3><p>Safe, compassionate maternity care from prenatal to postnatal.</p></div>
+      </div>
+    </section>
+
+    <!-- Patient Portal -->
+    <section id="portal">
+      <h2 class="section-title">Patient Portal</h2>
+      <!-- Login Form -->
+      <div class="form-container" id="loginForm">
+        <h3>Login</h3>
+        <input type="email" placeholder="Email Address">
+        <input type="password" placeholder="Password">
+        <button type="button" onclick="login()">Login</button>
+        <div class="form-footer">Don’t have an account? <a href="#" onclick="toggleForms()">Register</a></div>
+      </div>
+
+      <!-- Register Form -->
+      <div class="form-container" id="registerForm" style="display:none;">
+        <h3>Register</h3>
+        <input type="text" placeholder="Full Name">
+        <input type="email" placeholder="Email Address">
+        <input type="password" placeholder="Password">
+        <button type="button" onclick="register()">Register</button>
+        <div class="form-footer">Already have an account? <a href="#" onclick="toggleForms()">Login</a></div>
+      </div>
+
+      <!-- Appointment Form -->
+      <div class="form-container" id="appointmentForm" style="display:none;">
+        <h3>Book an Appointment</h3>
+        <form id="appointmentFormElement">
+          <input type="text" name="full_name" placeholder="Full Name" required>
+          <input type="email" name="email" placeholder="Email Address" required>
+          <input type="tel" name="phone" placeholder="Phone Number" required>
+          <select name="department" required>
+            <option value="">Select Department</option>
+            <option value="Renal Unit">Renal Unit</option>
+            <option value="Cardiology">Cardiology</option>
+            <option value="Pediatrics">Pediatrics</option>
+            <option value="Radiology">Radiology</option>
+            <option value="Orthopedics">Orthopedics</option>
+            <option value="Maternity">Maternity</option>
+          </select>
+          <input type="date" name="appointment_date" required>
+          <input type="time" name="appointment_time" required>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <h2 class="section-title">Contact Us</h2>
+      <p style="text-align:center;">📍 Nairobi, Kenya</p>
+      <p style="text-align:center;">☎ +254 768378553</p>
+      <p style="text-align:center;">✉ basil59mutuku@gmail.com</p>
+    </section>
+
+    <!-- Footer -->
+    <footer><p>&copy; 2025 Harmony Medical Centre | All Rights Reserved</p></footer>
+
+  </div>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    function toggleForms() {
+      document.getElementById("loginForm").style.display =
+        document.getElementById("loginForm").style.display === "none" ? "block" : "none";
+      document.getElementById("registerForm").style.display =
+        document.getElementById("registerForm").style.display === "none" ? "block" : "none";
+    }
+    function login() {
+      document.getElementById("loginForm").style.display = "none";
+      document.getElementById("appointmentForm").style.display = "block";
+    }
+    function register() {
+      document.getElementById("registerForm").style.display = "none";
+      document.getElementById("appointmentForm").style.display = "block";
+    }
+
+    // Dropdown toggle
+    document.querySelector(".dropdown-btn").addEventListener("click", function() {
+      const dropdown = this.nextElementSibling;
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    });
+
+    // ✅ Appointment form submission to Node.js backend
+    document.getElementById("appointmentFormElement").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        const res = await fetch("http://localhost:4000/appointments", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+
+        const result = await res.json();
+        if (res.ok) {
+          alert("✅ " + result.message);
+          this.reset();
+        } else {
+          alert("❌ " + result.message);
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Server error. Try again.");
+      }
+    });
+  </script>
+
+</body>
+</html>
